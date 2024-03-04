@@ -52,7 +52,6 @@ def get_sheet_data(sheet, column_names):
 def get_workbook_data(workbook):
     '''Takes a workbook and returns all worksheet data'''
     workbook_sheet_names = workbook.ws_names
-    print(workbook_sheet_names)
     sn_no = 1
     output_file_suffix = ""
     if len(workbook_sheet_names) > 1:
@@ -73,10 +72,9 @@ def get_workbook_data(workbook):
         worksheet = workbook.ws(ws=sheet_name)
         column_names = get_column_names(worksheet)
         sheet_data = get_sheet_data(worksheet, column_names)
-        if int(sheet_num) == sn_no:
-            workbook_data[sheet_name.lower().replace(' ', '_')] = sheet_data
-        else:
-            workbook_data = sheet_data
+
+        workbook_data[sheet_name.lower().replace(' ', '_')] = sheet_data
+
     return [output_file_suffix, workbook_data]
 
 def get_workbook(filename):
