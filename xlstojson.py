@@ -23,16 +23,17 @@ def main():
         pathname = os.path.splitext(source_file)
         file_name = pathname[0].split('/')[-1]
         try:
-            output_file_name = file_name + '.json'
             workbook_data = get_excel_data_as_json(source_file)
+            output_file_name = f'{file_name}{workbook_data[0]}.json'
             with open(output_file_name, 'w+', encoding="utf-8") as output_file:
                 output_file.write(json.dumps(
-                    workbook_data,
-                    sort_keys=True,
+                    workbook_data[1],
+                    # sort_keys=True,
                     indent=2,
+                    ensure_ascii=False,
                     separators=(",", ": ")
                 ))
-                print (f"{output_file.name} was created")
+                print(f"Export file --> {output_file.name}")
         except Exception as error:
             print("some error occured")
             print(error)
