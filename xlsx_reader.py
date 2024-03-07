@@ -21,8 +21,15 @@ def get_row_data(row, column_names, column_type):
                      "array": eval, "string": str, "boolean": eval, "bool": eval, 'object': eval}
     for cell in row:
         column_name = column_names[counter]
-        if column_type[counter] == "array" or column_type[counter] == "list" and cell == "":
-            cell = '[]'
+        if cell == "":
+            if column_type[counter] == "array" or column_type[counter] == "list":
+                cell = '[]'
+            elif column_type[counter] == "number" or column_type[counter] == "int":
+                cell = '0'
+            elif column_type[counter] == "float":
+                cell = '0.0'
+            elif column_type[counter] == "object":
+                cell = '{}'
         if column_type[counter] == "boolean" or column_type[counter] == "bool":
             if cell is False or cell is True:
                 cell = str(cell)
@@ -34,7 +41,10 @@ def get_row_data(row, column_names, column_type):
                 else:
                     raise 'The cell value must be True or False, but actually is ' + str(cell)
 
-        row_data[column_name] = d_column_type.get(column_type[counter])(cell)
+        try:
+            row_data[column_name] = d_column_type.get(column_type[counter])(cell)
+        except:
+            print('cell=', cell, "\ttype=", column_type[counter], 'cell_type=', type(cell))
         counter = counter + 1
     return row_data
 
