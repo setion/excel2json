@@ -1,3 +1,22 @@
+本代码在 https://github.com/paceaux/xlsx-to-json 的基础上进行更改
+
+1. 增加对数据类型的处理，当前从第4行开始读取数据
+
+典型数据格式如下：
+
+   第一行：字段名
+   
+   第二行：字段类型
+
+   第三行：字段名解释
+
+![image](https://github.com/setion/excel2json/assets/3980802/2356a788-48da-42ae-95fb-ee031268298e)
+
+   目前支持的类型有：number/int, float, array/list, boolean/bool, string
+
+2. 支持整表导出和按sheet导出
+3. 本次修改基于自身项目需求更改，若无法满足其他项目，还望自行修改。
+   
 # xlsx-to-json
 Using Python, convert an Excel (xlsx or xls) document to JSON
 
